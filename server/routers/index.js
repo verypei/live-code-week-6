@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-// const foodRouter = require("")
-// const userRouter = require("")
+const foodRouter = require("./foodRouter")
+const userRouter = require("./userRouter");
 
 
 router.use("/foods",foodRouter)
