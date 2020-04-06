@@ -10,8 +10,9 @@ class userController{
         }
         User.create(obj)
         .then(data=>{
+            // console.log(data,"===============")
             let access_token = jwt.sign({id:data.id,email:data.email},process.env.SECRET)
-            res.status(200).json({token:access_token})
+            res.status(201).json({id:data.id,email:data.email})
         })
         .catch(err=>{
             console.log(err)
