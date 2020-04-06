@@ -2,13 +2,14 @@ $(document).ready(()=>{
     let token = localStorage.getItem('token')
     if(token){
         $("#table").show()
+        foodTable()
     }
     else{
         $("#login").show()
     }
 })
 
-$("loginForm").submit((event)=>{
+$("#loginForm").submit((event)=>{
 
     event.preventDefault()
 
@@ -39,7 +40,31 @@ function afterLogin(){
     $("#table").show()
 }
 
-function deleteFood(){
+function foodTable(){
     let token = localStorage.getItem("token")
-    // $.ajax("")
+
+    $.ajax({
+        type:"GET",
+        url:"http://localhost:3000/foods",
+        headers:{token:token}
+    })
+    .done(data=>{
+        
+        for (let index = 0; index < data.length; index++) {
+            $("#appendTable").append(`
+            <tr>
+                <td>${data[i].title}</td>
+                <td>${data[i].price}</td>
+                <td>${data[i].ingredients}</td>
+                <td>${data[i].tag}</td>
+                <td>
+                <button onclick = deleteFood(${data[i].id})>delete</button>
+                </td>
+            </tr>
+
+            `)
+            
+        }
+    })
+    .fail()
 }
